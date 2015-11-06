@@ -8,6 +8,7 @@ import urllib2,re,sys,itertools
 from bs4 import BeautifulSoup
 
 def main():
+	completeList = list()
 	wiki = "http://denhac.org/wiki/index.php?title=Soda_Machine"
 	page = urllib2.urlopen(wiki)
 	soup = BeautifulSoup(page)
@@ -22,8 +23,9 @@ def main():
 	    	for line in cellsList:
 	    		line = str(line)
 	    		line = line.replace("<td>","").replace("</td>","").replace("\n","")
-	    		print(line)
-	sys.exit()
+	    		completeList.append(line)
+	print(completeList)
+		
 
 
 if __name__ == '__main__':

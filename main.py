@@ -4,7 +4,7 @@
 ##Parse it for the key value pair of button:sodaType
 ##Export it as JSON to a flat file with specified path
 
-import urllib2,re,sys
+import urllib2,re,sys,itertools
 from bs4 import BeautifulSoup
 
 def main():
@@ -21,9 +21,9 @@ def main():
 	    	cellsList
 	    	for line in cellsList:
 	    		line = str(line)
-	    		line = line.replace("<td>","").replace("</td>","")
-	    	
-	    	sys.exit()
+	    		line = line.replace("<td>","").replace("</td>","").replace("\n","")
+	    		print(line)
+	sys.exit()
 
 
 if __name__ == '__main__':

@@ -4,7 +4,7 @@
 ##Parse it for the key value pair of button:sodaType
 ##Export it as JSON to a flat file with specified path
 
-import urllib2,re,json
+import urllib2,json
 from bs4 import BeautifulSoup
 
 def main():
@@ -12,9 +12,9 @@ def main():
 	completeList = list()
 	completeDict = dict()
 	tempTestingFile = "testOut.json"
+	remoteURL = "http://denhac.org/wiki/index.php?title=Soda_Machine"
 	#Obtaining the data from the wiki
-	wiki = "http://denhac.org/wiki/index.php?title=Soda_Machine"
-	page = urllib2.urlopen(wiki)
+	page = urllib2.urlopen(remoteURL)
 	soup = BeautifulSoup(page)
 	#Get the table out of the raw HTML
 	table = soup.find("table", { "class" : "wikitable" })
@@ -41,9 +41,6 @@ def main():
 	json_str = json.dumps(sodaTableInJSON)
 	with open(tempTestingFile,"w") as outFile:
 		outFile.write(sodaTableInJSON)
-
-		
-
 
 if __name__ == '__main__':
 	main()

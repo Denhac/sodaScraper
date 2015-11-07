@@ -31,8 +31,12 @@ def main():
 		completeList.pop(0)
 		completeList.pop(0)
 	#Turn the dict into JSON
-	sodaTableInJSON = json.dumps(completeDict, ensure_ascii=True)
-	print(sodaTableInJSON)
+	sodaTableInJSON = json.dumps(completeDict, ensure_ascii=False)
+	#Write the JSON object to a file.
+	tempTestingFile = "testOut.json"
+	json_str = json.dumps(sodaTableInJSON)
+	with open(tempTestingFile,"w") as outFile:
+		outFile.write(sodaTableInJSON)
 
 		
 

@@ -8,19 +8,23 @@ import urllib2,re,json
 from bs4 import BeautifulSoup
 
 def main():
+	#Variables
 	completeList = list()
 	completeDict = dict()
+	tempTestingFile = "testOut.json"
+	#Obtaining the data from the wiki
 	wiki = "http://denhac.org/wiki/index.php?title=Soda_Machine"
 	page = urllib2.urlopen(wiki)
 	soup = BeautifulSoup(page)
+	#Get the table out of the raw HTML
 	table = soup.find("table", { "class" : "wikitable" })
 	#We have the table now.  Just need to parse the data into a JSON type
 	for row in table.findAll("tr"):
 	    cells = row.findAll("td")
-	    #For each "tr", assign each "td" to a variable.
 	    cellsList = list(cells)
 	    if len(cellsList) == int(2):
 	    	cellsList
+	    	#For each line in the file, remove <td> and </td> and \n with nothing.  Move each row into a list element.
 	    	for line in cellsList:
 	    		line = str(line)
 	    		line = line.replace("<td>","").replace("</td>","").replace("\n","")
@@ -33,7 +37,7 @@ def main():
 	#Turn the dict into JSON
 	sodaTableInJSON = json.dumps(completeDict, ensure_ascii=False)
 	#Write the JSON object to a file.
-	tempTestingFile = "testOut.json"
+
 	json_str = json.dumps(sodaTableInJSON)
 	with open(tempTestingFile,"w") as outFile:
 		outFile.write(sodaTableInJSON)

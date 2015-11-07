@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 
 def main():
 	completeList = list()
+	completeDict = dict()
 	wiki = "http://denhac.org/wiki/index.php?title=Soda_Machine"
 	page = urllib2.urlopen(wiki)
 	soup = BeautifulSoup(page)
@@ -24,7 +25,12 @@ def main():
 	    		line = str(line)
 	    		line = line.replace("<td>","").replace("</td>","").replace("\n","")
 	    		completeList.append(line)
-	print(completeList)
+	while len(completeList) >= 2:
+		completeDict[completeList[0]] = completeList[1]
+		completeList.pop(0)
+		completeList.pop(0)
+		
+
 		
 
 

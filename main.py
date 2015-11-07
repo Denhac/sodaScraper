@@ -4,7 +4,7 @@
 ##Parse it for the key value pair of button:sodaType
 ##Export it as JSON to a flat file with specified path
 
-import urllib2,re,sys,itertools
+import urllib2,re,json
 from bs4 import BeautifulSoup
 
 def main():
@@ -25,11 +25,14 @@ def main():
 	    		line = str(line)
 	    		line = line.replace("<td>","").replace("</td>","").replace("\n","")
 	    		completeList.append(line)
+	#Turn the list into a dictionary
 	while len(completeList) >= 2:
 		completeDict[completeList[0]] = completeList[1]
 		completeList.pop(0)
 		completeList.pop(0)
-		
+	#Turn the dict into JSON
+	sodaTableInJSON = json.dumps(completeDict, ensure_ascii=True)
+	print(sodaTableInJSON)
 
 		
 

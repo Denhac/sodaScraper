@@ -40,6 +40,7 @@ def main():
 
 	json_str = json.dumps(sodaTableInJSON)
 	with open(tempTestingFile,"w") as outFile:
+		print(sodaTableInJSON)
 		outFile.write(sodaTableInJSON)
 
 if __name__ == '__main__':
